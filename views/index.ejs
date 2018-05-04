@@ -109,6 +109,11 @@
     <script>
         (jQuery)(function($) {
 
+            $.jsonRPC.setup({
+                endPoint: 'https://shoutmythink.herokuapp.com/',
+                namespace: ''
+            });
+
             var article_list;
 
             $.jsonRPC.request('article_database_check', {
