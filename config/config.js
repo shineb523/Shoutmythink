@@ -4,6 +4,8 @@
 
  module.exports = {
 
+     db_uri:,
+
      db_schemas: [{
              file: './think_schema',
              collection: 'think_schema',
