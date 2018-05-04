@@ -61,7 +61,6 @@ console.log('뷰 엔진이 ejs로 설정되었습니다.');
 
 
 //===== 서버 변수 설정 및 static으로 public 폴더 설정  =====//
-console.log('config.server_port : %d', config.server_port);
 app.set('port', process.env.PORT || 3000);
 
 
