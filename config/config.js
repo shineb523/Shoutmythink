@@ -4,7 +4,7 @@
 
  module.exports = {
 
-     db_uri:,
+     db_uri:'mongodb://shineb523:Sesteem7962@ds215370.mlab.com:15370/shoutmythink',
 
      db_schemas: [{
              file: './think_schema',
