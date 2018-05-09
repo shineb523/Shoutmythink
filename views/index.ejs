@@ -8,7 +8,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title></title>
     <style>
         body {
@@ -79,6 +79,18 @@
         #write_submit_button {
             flex-grow: 1;
         }
+
+        .material-icons.md-dark {
+            color: rgba(0, 0, 0, 1);
+        }
+
+        .material-icons.md-dark.md-inactive {
+            color: rgba(0, 0, 0, 0.5);
+        }
+
+        #etc_button {
+            text-decoration: none;
+        }
     </style>
 </head>
 
@@ -94,10 +106,17 @@
     </div>
 
     <div id="article_list" class="card-columns">
-
+        <div class="card">
+            <div class="card-body">
+                <a href="#" id="etc_button" class="material-icons md-dark md-inactive">more_horiz</a>
+                <p class="card-text">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores incidunt odio quam doloribus, veritatis eum? Modi cum consequatur totam et doloribus illo iusto, maiores suscipit nesciunt sint rem quidem amet illum, voluptates ducimus aliquid architecto laborum! Officia libero ducimus beatae reprehenderit quia eos odit nulla praesentium minus accusantium dicta obcaecati veritatis assumenda id molestias ex rem, ratione, perferendis excepturi aliquam. Eligendi impedit, sint, eaque quam nesciunt delectus excepturi vel illo, quidem officia quibusdam debitis! Ut animi, quidem ab illum numquam cumque aperiam laudantium modi excepturi ipsum similique architecto magnam molestiae rem vero expedita quaerat, quis voluptates quos nostrum, quisquam quo?
+                </p>
+            </div>
+        </div>
     </div>
 
-    <button id="write_button" class="btn btn-outline-secondary" >Write</button>
+    <button id="write_button" class="btn btn-outline-secondary">Write</button>
 
 
 
@@ -223,6 +242,15 @@
                     return false;
                 }
             });
+
+            $('#etc_button').hover(
+                function() {
+                    $('#etc_button').attr('class', 'material-icons md-dark');
+                },
+                function() {
+                    $('#etc_button').attr('class', 'material-icons md-dark md-inactive');
+                }
+            );
 
 
 
