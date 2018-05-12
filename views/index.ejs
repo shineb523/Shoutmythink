@@ -233,17 +233,17 @@
             })
 
 
-            $(document).on('click touchstart', function(e) {
+            $(document).on('tap click', function(e) {
                 if (e.target.getAttribute('id') == 'write_dim_bg') {
                     $('#popup_outermost').fadeOut();
                 }
             });
 
-            $('#main_write_article_button').on('click touchstart', function() {
+            $('#main_write_article_button').on('tap click', function() {
                 $('#popup_outermost').fadeIn();
             });
 
-            $('#write_article_button').on('click touchstart', function() {
+            $('#write_article_button').on('tap click', function() {
                 if ($('#think_textarea').val().length == 0) {
                     alert("Please enter more than 1 character.");
                     $('#think_textarea').focus();
