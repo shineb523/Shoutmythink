@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title></title>
     <style>
-        #write_button {
+        #main_write_article_button {
             position: fixed;
             bottom: 0;
             width: 100%;
@@ -73,11 +73,11 @@
             border-color: rgba(28, 32, 31, 0.68);
         }
 
-        #write_submit_button {
+        #write_article_button {
             flex-grow: 1;
         }
 
-        #article_list{
+        #article_list {
             margin-bottom: 50px;
             margin-left: 5px;
             margin-right: 5px;
@@ -111,6 +111,7 @@
             margin-right: 3px;
             margin-left: 3px;
         }
+
         /* .dropdown.show .material-icons.md-dark{
             color: rgba(0, 0, 0, 1);
         } */
@@ -125,7 +126,7 @@
                 <textarea id="think_textarea" class="form-control" name="think" placeholder="Shoutmythink assumes no responsibility for all contents posted.&#13;&#10;&#13;&#10;Shoutmythink는 게시되는 모든 내용에 대하여 어떠한 법적 책임도 지지 않습니다.
 
                 "></textarea>
-                <input id="write_submit_button" class="btn btn-outline-secondary" type="submit" value="write">
+                <button id="write_article_button" class="btn btn-outline-secondary" value="write">write</button>
             </form>
         </div>
     </div>
@@ -134,7 +135,7 @@
 
     </div>
 
-    <button id="write_button" class="btn btn-outline-secondary">Write</button>
+    <button id="main_write_article_button" class="btn btn-outline-secondary">Write</button>
 
 
 
@@ -238,26 +239,19 @@
                 }
             });
 
-            $('#write_button').on('click', function() {
+            $('#main_write_article_button').on('click touchstart', function() {
                 $('#popup_outermost').fadeIn();
             });
 
-            $('#close_write_popup_button').on('click', function() {
-                $('#popup_outermost').fadeOut();
-            });
-
-
-            $('#thinking_write_form').submit(function() {
+            $('#write_article_button').on('click touchstart', function() {
                 if ($('#think_textarea').val().length == 0) {
                     alert("Please enter more than 1 character.");
                     $('#think_textarea').focus();
-                    return false;
-                }
-
-                if ($('#think_textarea').val().length >= 1000) {
+                } else if ($('#think_textarea').val().length >= 1000) {
                     alert("Please enter less than 1000 characters.");
                     $('#think_textarea').focus();
-                    return false;
+                } else {
+                    $('#thinking_write_form').submit();
                 }
             });
 
@@ -270,14 +264,14 @@
             //     }
             // );
 
-            $('#write_button').hover(
+            $('#main_write_article_button').hover(
                 function() {
-                    $('#write_button').css('background-color', '#6c757d');
-                    $('#write_button').css('color', '#fff');
+                    $('#main_write_article_button').css('background-color', '#6c757d');
+                    $('#main_write_article_button').css('color', '#fff');
                 },
                 function() {
-                    $('#write_button').css('background-color', '#fff');
-                    $('#write_button').css('color', '#6c757d');
+                    $('#main_write_article_button').css('background-color', '#fff');
+                    $('#main_write_article_button').css('color', '#6c757d');
                 }
             );
 
