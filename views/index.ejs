@@ -8,6 +8,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title></title>
     <style>
@@ -143,85 +144,72 @@
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     <script src="../public/jquery.jsonrpc.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script>
         (jQuery)(function($) {
 
-            $.jsonRPC.setup({
-                endPoint: '/api',
-                namespace: ''
-            });
+                $.jsonRPC.setup({
+                    endPoint: '/api',
+                    namespace: ''
+                });
 
-            var article_list;
+                var article_list;
 
-            $.jsonRPC.request('article_database_check', {
-                id: 001,
-                params: [],
-                success: function(data) {
-                    console.log('Received success response of jsonRPC.');
-                    var article_list = data.result;
-                    shuffle(article_list);
-                    console.log('article_list : ', article_list);
+                $.jsonRPC.request('article_database_check', {
+                    id: 001,
+                    params: [],
+                    success: function(data) {
+                        console.log('Received success response of jsonRPC.');
+                        var article_list = data.result;
+                        shuffle(article_list);
+                        console.log('article_list : ', article_list);
 
-                    var article_list_string = '';
+                        var article_list_string = '';
 
 
 
-                    $.each(article_list, function(index, value) {
-                        article_list_string += '<div class=\"card\"><div class=\"card-body\"><p class=\"card-text\">';
-                        article_list_string += value.text;
-                        article_list_string += '</p></div></div>';
-                    });
-                    $('#article_list').append(article_list_string);
+                        $.each(article_list, function(index, value) {
+                            article_list_string += '<div class=\"card\"><div class=\"card-body\"><p class=\"card-text\">';
+                            article_list_string += value.text;
+                            article_list_string += '</p></div></div>';
+                        });
+                        $('#article_list').append(article_list_string);
 
-                },
-                error: function(data) {
-                    console.log('Received error response of jsonRPC.');
-                    console.log(data.error.code + ', ' + data.error.message);
-                    window.location.href = '../views/error';
+                    },
+                    error: function(data) {
+                        console.log('Received error response of jsonRPC.');
+                        console.log(data.error.code + ', ' + data.error.message);
+                        window.location.href = '../views/error';
+                    }
+                });
+
+                function shuffle(array) {
+                    var currentIndex = array.length,
+                        temporaryValue, randomIndex;
+
+                    // While there remain elements to shuffle...
+                    while (0 !== currentIndex) {
+
+                        // Pick a remaining element...
+                        randomIndex = Math.floor(Math.random() * currentIndex);
+                        currentIndex -= 1;
+
+                        // And swap it with the current element.
+                        temporaryValue = array[currentIndex];
+                        array[currentIndex] = array[randomIndex];
+                        array[randomIndex] = temporaryValue;
+                    }
+                    return array;
                 }
-            });
 
-            function shuffle(array) {
-                var currentIndex = array.length,
-                    temporaryValue, randomIndex;
-
-                // While there remain elements to shuffle...
-                while (0 !== currentIndex) {
-
-                    // Pick a remaining element...
-                    randomIndex = Math.floor(Math.random() * currentIndex);
-                    currentIndex -= 1;
-
-                    // And swap it with the current element.
-                    temporaryValue = array[currentIndex];
-                    array[currentIndex] = array[randomIndex];
-                    array[randomIndex] = temporaryValue;
-                }
-                return array;
-            }
-
-            var popupHeight = $(window).height() * 0.5;
-            var popupWidth = $(window).width() * 0.5;
-            var popupExtraHeight = ($(window).height() - popupHeight) / 2;
-            var popupExtraWidth = ($(window).width() - popupWidth) / 2;
-
-
-            $('#write_popup').css({
-                'top': popupExtraHeight,
-                'left': popupExtraWidth,
-                'height': popupHeight,
-                'width': popupWidth
-            });
-
-
-            $(window).resize(function() {
                 var popupHeight = $(window).height() * 0.5;
                 var popupWidth = $(window).width() * 0.5;
                 var popupExtraHeight = ($(window).height() - popupHeight) / 2;
                 var popupExtraWidth = ($(window).width() - popupWidth) / 2;
+
 
                 $('#write_popup').css({
                     'top': popupExtraHeight,
@@ -230,52 +218,74 @@
                     'width': popupWidth
                 });
 
-            })
 
+                $(window).resize(function() {
+                    var popupHeight = $(window).height() * 0.5;
+                    var popupWidth = $(window).width() * 0.5;
+                    var popupExtraHeight = ($(window).height() - popupHeight) / 2;
+                    var popupExtraWidth = ($(window).width() - popupWidth) / 2;
 
-            $(document).on('tap click', function(e) {
-                if (e.target.getAttribute('id') == 'write_dim_bg') {
-                    $('#popup_outermost').fadeOut();
-                }
-            });
+                    $('#write_popup').css({
+                        'top': popupExtraHeight,
+                        'left': popupExtraWidth,
+                        'height': popupHeight,
+                        'width': popupWidth
+                    });
 
-            $('#main_write_article_button').on('tap click', function() {
-                $('#popup_outermost').fadeIn();
-            });
+                })
 
-            $('#write_article_button').on('tap click', function() {
-                if ($('#think_textarea').val().length == 0) {
-                    alert("Please enter more than 1 character.");
-                    $('#think_textarea').focus();
-                } else if ($('#think_textarea').val().length >= 1000) {
-                    alert("Please enter less than 1000 characters.");
-                    $('#think_textarea').focus();
+                var filter = "win16|win32|win64|mac|macintel";
+
+                if (navigator.platform) {
+                    if (filter.indexOf(navigator.platform.toLowerCase()) < 0) {
+                        // When a client accesses with mobile.
                 } else {
-                    $('#thinking_write_form').submit();
+                    // When a client accesses with desktop.
                 }
-            });
 
-            // $('.material-icons.md-dark').hover(
-            //     function() {
-            //         $('.material-icons.md-dark').attr('class', 'material-icons md-dark');
-            //     },
-            //     function() {
-            //         $('.material-icons.md-dark').attr('class', 'material-icons md-dark md-inactive');
-            //     }
-            // );
+                        $(document).on('touchstart click', function(e) {
+                            if (e.target.getAttribute('id') == 'write_dim_bg') {
+                                $('#popup_outermost').fadeOut();
+                            }
+                        });
 
-            $('#main_write_article_button').hover(
-                function() {
-                    $('#main_write_article_button').css('background-color', '#6c757d');
-                    $('#main_write_article_button').css('color', '#fff');
-                },
-                function() {
-                    $('#main_write_article_button').css('background-color', '#fff');
-                    $('#main_write_article_button').css('color', '#6c757d');
-                }
-            );
+                        $('#main_write_article_button').on('tap click', function() {
+                            $('#popup_outermost').fadeIn();
+                        });
 
-        });
+                        $('#write_article_button').on('tap click', function() {
+                            if ($('#think_textarea').val().length == 0) {
+                                alert("Please enter more than 1 character.");
+                                $('#think_textarea').focus();
+                            } else if ($('#think_textarea').val().length >= 1000) {
+                                alert("Please enter less than 1000 characters.");
+                                $('#think_textarea').focus();
+                            } else {
+                                $('#thinking_write_form').submit();
+                            }
+                        });
+
+                        // $('.material-icons.md-dark').hover(
+                        //     function() {
+                        //         $('.material-icons.md-dark').attr('class', 'material-icons md-dark');
+                        //     },
+                        //     function() {
+                        //         $('.material-icons.md-dark').attr('class', 'material-icons md-dark md-inactive');
+                        //     }
+                        // );
+
+                        $('#main_write_article_button').hover(
+                            function() {
+                                $('#main_write_article_button').css('background-color', '#6c757d');
+                                $('#main_write_article_button').css('color', '#fff');
+                            },
+                            function() {
+                                $('#main_write_article_button').css('background-color', '#fff');
+                                $('#main_write_article_button').css('color', '#6c757d');
+                            }
+                        );
+
+                    });
     </script>
 </body>
 
